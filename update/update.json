@@ -1,8 +1,8 @@
 {
   "versionCode": 2,
   "versionName": "1.0.1",
-  "notes": "修复：非中文地区自动适配语言（大陆/港澳台用中文，其余地区用英文）；境内无法直连 GitHub 时自动切换蒲公英通道检查更新，并支持双通道互备下载入口。",
+  "notes": "更新弹窗改版：横向并列按钮、内置下载实时显示进度与速度、下载完成自动安装；修复主页背景误触进入功能页的问题。",
   "mandatory": false,
-  "apkUrl": "https://github.com/gaoyilun/LivePhotoTools/releases/download/v1.0.1/app-arm64-v8a-release.apk",
+  "apkUrl": "https://github.com/gaoyilun/LivePhotoTools/releases/download/v1.0.1/app-universal-release.apk",
   "fallbackUrl": "https://www.pgyer.com/LivePhotoTools"
 }
