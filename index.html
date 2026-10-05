@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="实况工具箱 Live Photo Tools —— 专注于 Android 实况照片（Live Photo / Motion Photo）的本地处理工具。合成、提取、编辑一气呵成。">
+  <title>实况工具箱 · Live Photo Tools</title>
+  <link rel="icon" href="./icon.png" type="image/png">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <!-- ===== 背景装饰层（暖色电影感氛围光） ===== -->
+  <div class="bg-fx" aria-hidden="true">
+    <div class="aurora aurora--1"></div>
+    <div class="aurora aurora--2"></div>
+    <div class="aurora aurora--3"></div>
+    <canvas id="stars" width="1791" height="1009"></canvas>
+    <div class="spotlight" id="spotlight"></div>
+    <div class="grid-lines"></div>
+  </div>
+
+  <!-- ===== 顶部导航 ===== -->
+  <header class="nav is-scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="#top" class="nav__brand">
+        <img src="./icon.png" alt="logo" class="nav__logo">
+        <span class="nav__name" data-i18n="nav.name">实况工具箱</span>
+      </a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#features" data-i18n="nav.features">功能</a>
+        <a href="#download" data-i18n="nav.download" class="active">下载</a>
+        <a href="#compat" data-i18n="nav.compat">兼容性</a>
+        <a href="#stack" data-i18n="nav.stack">技术栈</a>
+        <a href="#faq" data-i18n="nav.faq">常见问题</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="lang-toggle" id="langToggle" aria-label="切换到英文" title="English">EN</button>
+        <a href="https://github.com/gaoyilun/LivePhotoTools/releases" target="_blank" rel="noopener" class="btn btn--sm btn--primary nav__cta" data-i18n="nav.cta">下载 APK</a>
+        <button class="nav__burger" id="navBurger" aria-label="菜单" data-i18n-aria="nav.menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__scrim" id="navScrim"></div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== HERO（首屏：场景图作背景 + 左对齐文案） ===== -->
+    <section class="hero">
+      <!-- 用 <img> 承载首屏图：可靠渲染，避开 CSS background-image 不显示的问题 -->
+      <img class="hero__bg" src="./hero-scene.jpg" alt="" aria-hidden="true">
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="hero__badge reveal" style="--d:0">
+            <span class="pulse-dot"></span>
+            <span data-i18n="hero.badge">v1.0.1 · Android 8+</span>
+          </div>
+          <h1 class="hero__title reveal" style="--d:1">
+            <span class="hero__title-main" data-i18n="hero.title">实况工具箱</span>
+            <span class="hero__title-en" id="typewriter">实况照片 </span>
+          </h1>
+          <p class="hero__sub reveal" style="--d:2" data-i18n-html="hero.sub">Android Motion 实况（ Live 照片）处理工具</p>
+          <div class="hero__actions reveal" style="--d:3">
+            <a href="#download" class="btn btn--primary btn--magnetic" data-magnetic="">
+              <span class="btn__icon">⬇</span> <span data-i18n="hero.download">立即下载 APK</span>
+            </a>
+            <a href="#features" class="btn btn--ghost btn--magnetic" data-magnetic="">
+              <span data-i18n="hero.explore">探索功能</span> <span class="btn__icon btn__icon--arrow">→</span>
+            </a>
+          </div>
+
+          <div class="hero__tools reveal" style="--d:4">
+            <div class="hero__tool">
+              <span class="hero__tool-ico" style="--c1:#6ee7b7;--c2:#10b981">🧩</span>
+              <span class="hero__tool-name" data-i18n="tool.compose">Live 合成</span>
+            </div>
+            <div class="hero__tool">
+              <span class="hero__tool-ico" style="--c1:#93c5fd;--c2:#3b82f6">🔍</span>
+              <span class="hero__tool-name" data-i18n="tool.extract">Live 提取</span>
+            </div>
+            <div class="hero__tool">
+              <span class="hero__tool-ico" style="--c1:#f9a8d4;--c2:#ec4899">✂️</span>
+              <span class="hero__tool-name" data-i18n="tool.edit">Live 编辑</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#features" class="hero__scroll" aria-label="向下滚动" data-i18n-aria="hero.scroll">
+        <span class="hero__scroll-mouse"><span class="hero__scroll-wheel"></span></span>
+      </a>
+    </section>
+
+    <!-- ===== 功能特性 ===== -->
+    <section class="section" id="features">
+      <div class="section__head reveal">
+        <span class="section__tag" data-i18n="features.tag">Features</span>
+        <h2 class="section__title" data-i18n="features.title">打开工具箱，取用三大能力</h2>
+        <p class="section__desc" data-i18n="features.desc">合成、提取、编辑三件核心工具，开箱即用。</p>
+      </div>
+
+      <div class="features-sub reveal" style="--d:1">
+        <span class="sub-chip" data-i18n="chip.local">🔒 本地优先 · 素材不上传</span>
+        <span class="sub-chip" data-i18n="chip.split">🌗 自适应分屏小窗</span>
+        <span class="sub-chip" data-i18n="chip.hw">⚡ 硬件加速 · 高效导出</span>
+      </div>
+
+      <div class="toolbox reveal is-open" id="toolbox">
+        <div class="toolbox__lid" aria-hidden="true"></div>
+        <div class="toolbox__body"></div>
+        <div class="toolbox__dots">
+          <button class="toolbox__dot is-active" type="button" data-i18n-aria="tool.dot1" aria-label="工具 1" aria-current="true"></button>
+          <button class="toolbox__dot" type="button" data-i18n-aria="tool.dot2" aria-label="工具 2"></button>
+          <button class="toolbox__dot" type="button" data-i18n-aria="tool.dot3" aria-label="工具 3"></button>
+        </div>
+        <article class="tool tool--1">
+          <span class="tool__icon" style="--c1:#6ee7b7;--c2:#10b981">🧩</span>
+          <h3 class="tool__title" data-i18n="tool.compose">Live 合成</h3>
+          <p class="tool__text" data-i18n="tool.composeText">图片 + 视频 / 视频转实况</p>
+        </article>
+        <article class="tool tool--2">
+          <span class="tool__icon" style="--c1:#93c5fd;--c2:#3b82f6">🔍</span>
+          <h3 class="tool__title" data-i18n="tool.extract">Live 提取</h3>
+          <p class="tool__text" data-i18n="tool.extractText">提取封面 / 原视频 / GIF</p>
+        </article>
+        <article class="tool tool--3">
+          <span class="tool__icon" style="--c1:#f9a8d4;--c2:#ec4899">✂️</span>
+          <h3 class="tool__title" data-i18n="tool.edit">Live 编辑</h3>
+          <p class="tool__text" data-i18n="tool.editText">重选封面 · 调整速度 · 编辑音轨</p>
+        </article>
+      </div>
+
+      <!-- 三张带壳截屏：透明 PNG + 投影 + 浮动过渡 -->
+      <div class="screens">
+        <figure class="screen reveal" style="--d:1">
+          <img src="./shot-compose.png" alt="Live 合成界面" loading="lazy">
+          <figcaption data-i18n="tool.compose">Live 合成</figcaption>
+        </figure>
+        <figure class="screen reveal" style="--d:2">
+          <img src="./shot-extract.png" alt="Live 提取界面" loading="lazy">
+          <figcaption data-i18n="tool.extract">Live 提取</figcaption>
+        </figure>
+        <figure class="screen reveal" style="--d:3">
+          <img src="./shot-edit.png" alt="Live 编辑界面" loading="lazy">
+          <figcaption data-i18n="tool.edit">Live 编辑</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== 下载 ===== -->
+    <section class="section section--alt" id="download">
+      <div class="section__head reveal">
+        <span class="section__tag" data-i18n="download.tag">Download</span>
+        <h2 class="section__title" data-i18n="download.title">开始使用</h2>
+        <p class="section__desc" data-i18n="download.desc">一个通用安装包，适配所有 Android 8+ 设备。</p>
+      </div>
+
+      <div class="download reveal">
+        <div class="download__card">
+          <div class="download__head">
+            <img src="./icon.png" alt="app icon" class="download__icon">
+            <div>
+              <h3 class="download__name"><span data-i18n="download.name">实况工具箱</span> <span class="download__ver">v1.0.1</span></h3>
+              <p class="download__meta" data-i18n="download.meta">通用安装包 · 支持全部架构 · 签名安装包</p>
+            </div>
+          </div>
+          <div class="download__body">
+            <div class="download__row">
+              <span data-i18n="download.universal">通用安装包（适配所有 Android 设备）</span>
+              <a href="https://github.com/gaoyilun/LivePhotoTools/releases/download/v1.0.1/com.elleng.livephototools-1.0.1-universal-release.apk" class="btn btn--primary btn--magnetic" data-magnetic="" data-i18n="download.btn">下载</a>
+            </div>
+          </div>
+          <div class="download__foot">
+            <a href="https://github.com/gaoyilun/LivePhotoTools/releases" target="_blank" rel="noopener" class="link-arrow" data-i18n="download.releases">查看全部版本 →</a>
+            <a href="https://www.pgyer.com/LivePhotoTools" target="_blank" rel="noopener" class="link-arrow" data-i18n="download.mirror">境内备用下载 →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 兼容性 ===== -->
+    <section class="section" id="compat">
+      <div class="section__head reveal">
+        <span class="section__tag" data-i18n="compat.tag">Compatibility</span>
+        <h2 class="section__title" data-i18n="compat.title">设备兼容性</h2>
+        <p class="section__desc" data-i18n="compat.desc">已实测机型与系统版本，更多机型持续验证中。</p>
+      </div>
+
+      <div class="compat reveal">
+        <div class="compat__item compat__item--ok">
+          <span class="compat__status" data-i18n="compat.ok">✅ 支持</span>
+          <span class="compat__dev">小米 HyperOS 3</span>
+          <span class="compat__model">REDMI K90</span>
+        </div>
+        <div class="compat__item compat__item--partial">
+          <span class="compat__status" data-i18n="compat.partial">⭕️ 部分支持 *</span>
+          <span class="compat__dev">小米 HyperOS 1</span>
+          <span class="compat__model">Redmi Note 12 Turbo</span>
+        </div>
+      </div>
+      <p class="compat__note reveal" data-i18n="compat.note">* HyperOS 1 机型目前仅支持「Live 提取」，合成 / 编辑暂未验证。欢迎在 Issue 分享你的机型测试结果，帮助我们完善兼容性列表。</p>
+    </section>
+
+    <!-- ===== 技术栈 ===== -->
+    <section class="section section--alt" id="stack">
+      <div class="section__head reveal">
+        <span class="section__tag" data-i18n="stack.tag">Tech Stack</span>
+        <h2 class="section__title" data-i18n="stack.title">技术栈</h2>
+        <p class="section__desc" data-i18n="stack.desc">现代、轻量、全本地化的工程选型。</p>
+      </div>
+      <div class="stack reveal">
+        <span class="chip">Kotlin</span>
+        <span class="chip">Jetpack Compose</span>
+        <span class="chip">MIUI-X</span>
+        <span class="chip">MediaCodec</span>
+        <span class="chip">MediaExtractor</span>
+        <span class="chip">MediaMuxer</span>
+        <span class="chip">MediaMetadataRetriever</span>
+        <span class="chip">Gradle Kotlin DSL</span>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section" id="faq">
+      <div class="section__head reveal">
+        <span class="section__tag" data-i18n="faq.tag">FAQ</span>
+        <h2 class="section__title" data-i18n="faq.title">常见问题</h2>
+      </div>
+      <div class="faq reveal">
+        <details class="faq__item">
+          <summary><span data-i18n="faq.q1.q">合成的实况在相册里不显示为动态？</span><span class="faq__plus">＋</span></summary>
+          <p data-i18n="faq.q1.a">部分厂商相册对 Motion Photo 的兼容不同。建议优先使用 Google 相册或原厂图库查看；导出的视频 / GIF 为通用格式，任意播放器均可播放。</p>
+        </details>
+        <details class="faq__item">
+          <summary><span data-i18n="faq.q2.q">需要联网或上传照片吗？</span><span class="faq__plus">＋</span></summary>
+          <p data-i18n="faq.q2.a">不需要。所有处理均在设备本地完成，仅通过系统文件选择器访问你主动选择的媒体文件，不会私自读取相册，更不会上传云端。</p>
+        </details>
+        <details class="faq__item">
+          <summary><span data-i18n="faq.q3.q">支持哪些系统版本？</span><span class="faq__plus">＋</span></summary>
+          <p data-i18n="faq.q3.a">Android 8.0（API 26）及以上版本均可运行。</p>
+        </details>
+        <details class="faq__item">
+          <summary><span data-i18n="faq.q4.q">下载慢 / 无法访问 GitHub？</span><span class="faq__plus">＋</span></summary>
+          <p data-i18n="faq.q4.a">GitHub 访问受限时，可前往本页「境内备用下载」入口获取安装包，境内网络下同样快速稳定。</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img src="./icon.png" alt="logo" class="footer__logo">
+        <div>
+          <p class="footer__name" data-i18n="footer.name">实况工具箱 · Live Photo Tools</p>
+        </div>
+      </div>
+      <div class="footer__links">
+        <a href="https://github.com/gaoyilun/LivePhotoTools" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/gaoyilun/LivePhotoTools/releases" target="_blank" rel="noopener">Releases</a>
+        <a href="https://www.pgyer.com/LivePhotoTools" target="_blank" rel="noopener" data-i18n="footer.mirror">境内备用下载</a>
+      </div>
+    </div>
+    <p class="footer__made">Made with ❤️ on Android</p>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="回到顶部 ↑" data-i18n-aria="footer.top">↑</button>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>
