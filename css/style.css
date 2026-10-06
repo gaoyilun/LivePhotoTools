@@ -174,9 +174,19 @@ em { font-style: normal; font-weight: 700; color: inherit; }
 }
 .nav.is-scrolled {
   background: var(--nav-bg);
+  box-shadow: 0 1px 0 var(--border-hair);
+}
+/* 毛玻璃改由 ::before 承载：避免 .nav 自身带 backdrop-filter 变成其内部
+   position:fixed 子元素（#navLinks 菜单面板 / #navScrim 遮罩）的包含块，
+   否则下滑后 .nav 加上 .is-scrolled 时，菜单与遮罩会被相对导航条定位而错位 */
+.nav.is-scrolled::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 1px 0 var(--border-hair);
+  pointer-events: none;
+  z-index: -1;
 }
 .nav__inner {
   max-width: 1120px;
